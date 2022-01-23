@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2022 | Alex&#39;s Blog</title>
+  <title>实现单链表的新增操作 | Alex&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Alex&#39;s Blog">
-<meta property="og:url" content="http://example.com/archives/2022/index.html">
+  <meta name="description" content="实现单链表的新增操作链表作为最基本的数据结构，存储特点如下:可以用任意一组存储单元来存储单链表中的数据元素且存储单元可以不是连续的。N个节点连接在一起被称之为链表。当节点只包含其后继节点的信息的链表我们称之为单链表，在内存中存储的方式如下图:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现单链表的新增操作">
+<meta property="og:url" content="http://example.com/2022/01/23/%E5%AE%9E%E7%8E%B0%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%96%B0%E5%A2%9E%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="Alex&#39;s Blog">
+<meta property="og:description" content="实现单链表的新增操作链表作为最基本的数据结构，存储特点如下:可以用任意一组存储单元来存储单链表中的数据元素且存储单元可以不是连续的。N个节点连接在一起被称之为链表。当节点只包含其后继节点的信息的链表我们称之为单链表，在内存中存储的方式如下图:">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gynnyqy2fcj31ay06cmxf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gynnynpesvj319m0im75e.jpg">
+<meta property="article:published_time" content="2022-01-23T08:01:37.000Z">
+<meta property="article:modified_time" content="2022-01-23T08:02:20.807Z">
 <meta property="article:author" content="Alex">
+<meta property="article:tag" content="数据结构，Java">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNly1gynnyqy2fcj31ay06cmxf.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Alex&#39;s Blog" type="application/atom+xml">
   
@@ -142,36 +150,102 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-实现单链表的新增操作" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/01/23/%E5%AE%9E%E7%8E%B0%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%96%B0%E5%A2%9E%E6%93%8D%E4%BD%9C/" class="archive-article-date">
-  	<time datetime="2022-01-23T08:01:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-23</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/23/%E5%AE%9E%E7%8E%B0%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%96%B0%E5%A2%9E%E6%93%8D%E4%BD%9C/">实现单链表的新增操作</a>
+    <h1 class="article-title" itemprop="name">
+      实现单链表的新增操作
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2022/01/23/%E5%AE%9E%E7%8E%B0%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%96%B0%E5%A2%9E%E6%93%8D%E4%BD%9C/" class="archive-article-date">
+  	<time datetime="2022-01-23T08:01:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="实现单链表的新增操作"><a href="#实现单链表的新增操作" class="headerlink" title="实现单链表的新增操作"></a>实现单链表的新增操作</h1><p>链表作为最基本的数据结构，存储特点如下:可以用任意一组存储单元来存储单链表中的数据元素且存储单元可以不是连续的。N个节点连接在一起被称之为链表。当节点只包含其后继节点的信息的链表我们称之为单链表，在内存中存储的方式如下图:</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gynnyqy2fcj31ay06cmxf.jpg" alt="单链表的存储方式"></p>
+<span id="more"></span>
+<h2 id="定义链表"><a href="#定义链表" class="headerlink" title="定义链表"></a>定义链表</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">  Node node = <span class="keyword">null</span>;</span><br><span class="line">  <span class="keyword">int</span> data;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Node</span> <span class="params">(<span class="keyword">int</span> data)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.data = data;  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>链表最重要的操作是向链表中插入元素和从链表中删除元素</p>
+</blockquote>
+<p>单链表的插入操作是将值为X的的新节点插入到链表第i个节点位置上。也就是插入数据在ai - 1 与 ai之间。</p>
+<ul>
+<li>找到ai - 1的引用（存储位置）p</li>
+<li>生成一个数据域为x的新节点s</li>
+<li>设置p.next = s</li>
+<li>设置s.next = a </li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNly1gynnynpesvj319m0im75e.jpg" alt="单链表插入节点示意图"></p>
+<h1 id="单链表的基本操作代码"><a href="#单链表的基本操作代码" class="headerlink" title="单链表的基本操作代码"></a>单链表的基本操作代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkedlistDemo</span> </span>&#123;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  定义链表</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">        Node next = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">int</span> data;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span> <span class="params">(<span class="keyword">int</span> data)</span></span>&#123;<span class="keyword">this</span>.data = data;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Node head = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">/***</span></span><br><span class="line"><span class="comment">     * 向链表中插入数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> d 要插入的数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNode</span><span class="params">(<span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">        Node newNode =  <span class="keyword">new</span> Node(d);</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">            head = newNode;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Node tmp = head;</span><br><span class="line">        <span class="keyword">while</span> (tmp.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">            tmp = tmp.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/** add node to end*/</span></span><br><span class="line">        tmp.next = newNode;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/***</span></span><br><span class="line"><span class="comment">     * 对链表进行排序</span></span><br><span class="line"><span class="comment">     * 返回排序后的头节点</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Node <span class="title">orderList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Node nextNode = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">        Node curNode = head;</span><br><span class="line">        <span class="keyword">while</span> (curNode.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">            nextNode = curNode.next;</span><br><span class="line">            <span class="keyword">while</span> (nextNode != <span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span> (curNode.data &gt; nextNode.data)&#123;</span><br><span class="line">                    temp = curNode.data;</span><br><span class="line">                    curNode.data = nextNode.data;</span><br><span class="line">                    nextNode.data = temp;</span><br><span class="line">                &#125;</span><br><span class="line">                nextNode = nextNode.next;</span><br><span class="line">            &#125;</span><br><span class="line">            curNode = curNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/***</span></span><br><span class="line"><span class="comment">     * 返回节点长度</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">length</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">        Node tmp = head;</span><br><span class="line">        <span class="keyword">while</span> (tmp != <span class="keyword">null</span>)&#123;</span><br><span class="line">            length++;</span><br><span class="line">            tmp = tmp.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> length;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/***</span></span><br><span class="line"><span class="comment">     * 打印list</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">printList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Node tmp = head;</span><br><span class="line">        <span class="keyword">while</span> (tmp != <span class="keyword">null</span>)&#123;</span><br><span class="line">            System.out.println(tmp.data);</span><br><span class="line">            tmp = tmp.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LinkedlistDemo list = <span class="keyword">new</span> LinkedlistDemo();</span><br><span class="line">        list.addNode(<span class="number">1</span>);</span><br><span class="line">        list.addNode(<span class="number">11</span>);</span><br><span class="line">        list.addNode(<span class="number">3</span>);</span><br><span class="line">        list.addNode(<span class="number">4</span>);</span><br><span class="line">        System.out.println(list.length());</span><br><span class="line">        System.out.println(<span class="string">&quot;before ordre:&quot;</span>);</span><br><span class="line">        list.printList();</span><br><span class="line">        list.orderList();</span><br><span class="line">        System.out.println(<span class="string">&quot;after order&quot;</span>);</span><br><span class="line">        list.printList();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="输出结果"><a href="#输出结果" class="headerlink" title="输出结果"></a>输出结果</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">listlength：4</span><br><span class="line">before ordre:</span><br><span class="line">1</span><br><span class="line">11</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">after order:</span><br><span class="line">1</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">11</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wxpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -183,132 +257,119 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/01/23/%E5%AE%9E%E7%8E%B0%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%96%B0%E5%A2%9E%E6%93%8D%E4%BD%9C/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/01/23/ArrayList-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2022-01-23T07:33:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-23</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/01/23/ArrayList-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ArrayList 源码解析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/23/ArrayList-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">ArrayList 源码解析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ArrayList,Java,源码</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%96%B0%E5%A2%9E%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">实现单链表的新增操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E9%93%BE%E8%A1%A8"><span class="toc-number">1.1.</span> <span class="toc-text">定义链表</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E4%BB%A3%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">单链表的基本操作代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C"><span class="toc-number">3.</span> <span class="toc-text">输出结果</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/01/20/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E5%AD%97/" class="archive-article-date">
-  	<time datetime="2022-01-20T13:55:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-20</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/20/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E5%AD%97/">我的第一篇文字</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/01/20/hello-world/" class="archive-article-date">
-  	<time datetime="2022-01-20T13:33:28.745Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/20/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/01/13/HashMap%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2022-01-13T01:55:51.675Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-13</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -335,8 +396,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
