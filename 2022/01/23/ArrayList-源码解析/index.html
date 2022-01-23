@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>我的第一篇文字 | Alex&#39;s Blog</title>
+  <title>ArrayList 源码解析 | Alex&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是标题这是内容这是副标题w xiugasad asd asd">
-<meta property="og:type" content="website">
-<meta property="og:title" content="我的第一篇文字">
-<meta property="og:url" content="http://example.com/tags/tags.html">
+  <meta name="description" content="ArrayList 源码解析ArrayList概述ArrayList实现了List接口，并重写了所有方法。可以存储任何数据类型，包括null，数据可重复，线程不安全 类结构 主要成员变量12transient Object[] elementData; &#x2F;&#x2F; Object类型数组，用来存放ArrayList数据private int size;&#x2F;&#x2F;表述数组元素的个数。并非数组容量  主要常量123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArrayList 源码解析">
+<meta property="og:url" content="http://example.com/2022/01/23/ArrayList-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="Alex&#39;s Blog">
-<meta property="og:description" content="这是标题这是内容这是副标题w xiugasad asd asd">
+<meta property="og:description" content="ArrayList 源码解析ArrayList概述ArrayList实现了List接口，并重写了所有方法。可以存储任何数据类型，包括null，数据可重复，线程不安全 类结构 主要成员变量12transient Object[] elementData; &#x2F;&#x2F; Object类型数组，用来存放ArrayList数据private int size;&#x2F;&#x2F;表述数组元素的个数。并非数组容量  主要常量123">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-01-20T13:55:38.000Z">
-<meta property="article:modified_time" content="2022-01-20T14:14:34.001Z">
+<meta property="og:image" content="https://s2.loli.net/2022/01/17/oyC8kezROSXIlAB.png">
+<meta property="article:published_time" content="2022-01-23T07:33:59.000Z">
+<meta property="article:modified_time" content="2022-01-23T07:37:10.427Z">
 <meta property="article:author" content="Alex">
+<meta property="article:tag" content="ArrayList,Java,源码">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/01/17/oyC8kezROSXIlAB.png">
   
     <link rel="alternative" href="/atom.xml" title="Alex&#39;s Blog" type="application/atom+xml">
   
@@ -146,27 +149,57 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-ArrayList-源码解析" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      我的第一篇文字
+      ArrayList 源码解析
     </h1>
   
 
         
-        <a href="/tags/tags.html" class="archive-article-date">
-  	<time datetime="2022-01-20T13:55:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-20</time>
+        <a href="/2022/01/23/ArrayList-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2022-01-23T07:33:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="这是标题"><a href="#这是标题" class="headerlink" title="这是标题"></a>这是标题</h1><h2 id="这是内容"><a href="#这是内容" class="headerlink" title="这是内容"></a>这是内容</h2><h2 id="这是副标题w-xiugasad-asd-asd"><a href="#这是副标题w-xiugasad-asd-asd" class="headerlink" title="这是副标题w xiugasad asd asd"></a>这是副标题w xiugasad asd asd</h2>
+        <h1 id="ArrayList-源码解析"><a href="#ArrayList-源码解析" class="headerlink" title="ArrayList 源码解析"></a>ArrayList 源码解析</h1><h2 id="ArrayList概述"><a href="#ArrayList概述" class="headerlink" title="ArrayList概述"></a>ArrayList概述</h2><p>ArrayList实现了List接口，并重写了所有方法。可以存储任何数据类型，包括null，数据可重复，线程不安全</p>
+<h2 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h2><p><img src="https://s2.loli.net/2022/01/17/oyC8kezROSXIlAB.png" alt="image-20220117160032796"></p>
+<h3 id="主要成员变量"><a href="#主要成员变量" class="headerlink" title="主要成员变量"></a>主要成员变量</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">transient</span> Object[] elementData; <span class="comment">// Object类型数组，用来存放ArrayList数据</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> size;<span class="comment">//表述数组元素的个数。并非数组容量</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="主要常量"><a href="#主要常量" class="headerlink" title="主要常量"></a>主要常量</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>;<span class="comment">//默认初始化容量</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] EMPTY_ELEMENTDATA = &#123;&#125;;<span class="comment">//空数组</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;<span class="comment">//空数组，区别于EMPTY_ELEMENTDATA</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="相关知识"><a href="#相关知识" class="headerlink" title="相关知识"></a>相关知识</h3><p>Arrays类的<code>copyOf(U[] original, int newLength, Class&lt;? extends T[]&gt; newType)</code>方法用于复制指定数组original到新数组，新数组的长度为newLength，新数组元素类型为newType。</p>
+<ol>
+<li>如果新数组的长度大于旧数组，那么多出的那部分用null填充；</li>
+<li>如果新数组的长度小于旧数组，那么少的那部分直接截取掉。</li>
+</ol>
+<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T,U&gt; T[] copyOf(U[] original, <span class="keyword">int</span> newLength, Class&lt;? extends T[]&gt; newType) &#123;</span><br><span class="line">  <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">  T[] copy = ((Object)newType == (Object)Object[].class)</span><br><span class="line">    ? (T[]) <span class="keyword">new</span> Object[newLength]</span><br><span class="line">    : (T[]) Array.newInstance(newType.getComponentType(), newLength);</span><br><span class="line">  System.arraycopy(original, <span class="number">0</span>, copy, <span class="number">0</span>,</span><br><span class="line">                   Math.min(original.length, newLength));</span><br><span class="line">  <span class="keyword">return</span> copy;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ArrayList构造函数"><a href="#ArrayList构造函数" class="headerlink" title="ArrayList构造函数"></a>ArrayList构造函数</h3><h4 id="空参构造函数"><a href="#空参构造函数" class="headerlink" title="空参构造函数"></a>空参构造函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//构造一个初始容量为10的空列表。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="有参构造函数"><a href="#有参构造函数" class="headerlink" title="有参构造函数"></a>有参构造函数</h4><h5 id="第一种；创建容量大小为initialCapacity的ArrayList"><a href="#第一种；创建容量大小为initialCapacity的ArrayList" class="headerlink" title="第一种；创建容量大小为initialCapacity的ArrayList"></a>第一种；创建容量大小为initialCapacity的ArrayList</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创一个初始化容量为initialCapacity大小的ArrayList</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (initialCapacity &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.elementData = <span class="keyword">new</span> Object[initialCapacity];</span><br><span class="line">    <span class="comment">//如果initialCapacity=0，那就创建一个容量为10的</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (initialCapacity == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//小于0报错</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;Illegal Capacity: &quot;</span>+initialCapacity);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="第二种；创建一个包含指定集合c数据的ArrayList"><a href="#第二种；创建一个包含指定集合c数据的ArrayList" class="headerlink" title="第二种；创建一个包含指定集合c数据的ArrayList"></a>第二种；创建一个包含指定集合c数据的ArrayList</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line">  Object[] a = c.toArray();</span><br><span class="line">  <span class="keyword">if</span> ((size = a.length) != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (c.getClass() == ArrayList.class) &#123;</span><br><span class="line">      elementData = a;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">//为什么用Arrays.copyOf()?因为有时候toArray()方法返回的不是Object[].class</span></span><br><span class="line">      elementData = Arrays.copyOf(a, size, Object[].class);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// replace with empty array.</span></span><br><span class="line">    elementData = EMPTY_ELEMENTDATA;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="为什么用Arrays-copyOf-因为有时候toArray-方法返回的不是Object-class"><a href="#为什么用Arrays-copyOf-因为有时候toArray-方法返回的不是Object-class" class="headerlink" title="为什么用Arrays.copyOf()?因为有时候toArray()方法返回的不是Object[].class"></a>为什么用Arrays.copyOf()?因为有时候toArray()方法返回的不是Object[].class</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这个例子说明，toArray();有时候返回的不是Object[].class</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  Long[] array1 = &#123;<span class="number">1L</span>, <span class="number">2L</span>&#125;;</span><br><span class="line">  List&lt;Long&gt; list1 = Arrays.asList(array1);</span><br><span class="line">  Object[] array2 = list1.toArray();</span><br><span class="line">  System.out.println(array2.getClass() == Object[].class); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">  List&lt;Long&gt; list2 = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">  System.out.println(list2.toArray().getClass() == Object[].class); <span class="comment">// true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="add-E-e-尾部添加元素"><a href="#add-E-e-尾部添加元素" class="headerlink" title="add(E e) 尾部添加元素"></a>add(E e) 尾部添加元素</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 用于确定数组容量，e=hello，size=0</span></span><br><span class="line">  ensureCapacityInternal(size + <span class="number">1</span>);  <span class="comment">// Increments modCount!!</span></span><br><span class="line">  <span class="comment">// 末尾添加元素，然后size递增1</span></span><br><span class="line">  elementData[size++] = e;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityInternal</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123; <span class="comment">// minCapacity=1,elementData=&#123;&#125;</span></span><br><span class="line">    ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">calculateCapacity</span><span class="params">(Object[] elementData, <span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;</span><br><span class="line">        <span class="comment">// DEFAULT_CAPACITY=10，minCapacity=1，故返回10</span></span><br><span class="line">        <span class="keyword">return</span> Math.max(DEFAULT_CAPACITY, minCapacity);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> minCapacity;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureExplicitCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123; <span class="comment">// minCapacity=10</span></span><br><span class="line">    modCount++;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// minCapacity=10，elementData.length=0，所以调用grow方法扩容</span></span><br><span class="line">    <span class="keyword">if</span> (minCapacity - elementData.length &gt; <span class="number">0</span>)</span><br><span class="line">        grow(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">grow</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123; <span class="comment">//minCapacity=10</span></span><br><span class="line">    <span class="comment">// oldCapacity=0</span></span><br><span class="line">    <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">    <span class="comment">// newCapacity为oldCapacity的1.5倍，这里为0</span></span><br><span class="line">    <span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// newCapacity=0，minCapacity=10，所以该条件成立</span></span><br><span class="line">    <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="comment">// newCapacity=10</span></span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    <span class="comment">// 复制到新数组，数组容量为10</span></span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hugeCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (minCapacity &lt; <span class="number">0</span>) <span class="comment">// overflow</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError();</span><br><span class="line">    <span class="comment">// MAX_ARRAY_SIZE常量值为Integer.MAX_VALUE - 8，通过</span></span><br><span class="line">    <span class="comment">// 这段逻辑我们可以知道，ArrayList最大容量为Integer.MAX_VALUE</span></span><br><span class="line">    <span class="keyword">return</span> (minCapacity &gt; MAX_ARRAY_SIZE) ?</span><br><span class="line">        Integer.MAX_VALUE :</span><br><span class="line">        MAX_ARRAY_SIZE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过上面源码分析我们可以知道：</p>
+<ol>
+<li>任何一个空的ArrayList在添加第一个元素时，内部数组容量将被扩容为10；</li>
+<li>扩容时，newCapacity为oldCapacity的1.5倍；</li>
+<li>数组容量最大为Integer.MAX_VALUE；</li>
+<li>尾部添加元素不用移动任何元素，所以速度快。</li>
+</ol>
+
       
 
       
@@ -200,6 +233,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ArrayList,Java,源码</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -250,7 +294,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/tags/tags.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/01/23/ArrayList-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -262,6 +306,16 @@
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2022/01/20/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E5%AD%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">我的第一篇文字</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -283,7 +337,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%99%E6%98%AF%E6%A0%87%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">这是标题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%99%E6%98%AF%E5%86%85%E5%AE%B9"><span class="toc-number">1.1.</span> <span class="toc-text">这是内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%99%E6%98%AF%E5%89%AF%E6%A0%87%E9%A2%98w-xiugasad-asd-asd"><span class="toc-number">1.2.</span> <span class="toc-text">这是副标题w xiugasad asd asd</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ArrayList-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">ArrayList 源码解析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ArrayList%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">ArrayList概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">类结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="toc-number">1.2.1.</span> <span class="toc-text">主要成员变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E5%B8%B8%E9%87%8F"><span class="toc-number">1.2.2.</span> <span class="toc-text">主要常量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="toc-number">1.2.3.</span> <span class="toc-text">相关知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BA%90%E7%A0%81"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">源码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.4.</span> <span class="toc-text">ArrayList构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A9%BA%E5%8F%82%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">空参构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E5%8F%82%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">有参构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%EF%BC%9B%E5%88%9B%E5%BB%BA%E5%AE%B9%E9%87%8F%E5%A4%A7%E5%B0%8F%E4%B8%BAinitialCapacity%E7%9A%84ArrayList"><span class="toc-number">1.2.4.2.1.</span> <span class="toc-text">第一种；创建容量大小为initialCapacity的ArrayList</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%EF%BC%9B%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8C%85%E5%90%AB%E6%8C%87%E5%AE%9A%E9%9B%86%E5%90%88c%E6%95%B0%E6%8D%AE%E7%9A%84ArrayList"><span class="toc-number">1.2.4.2.2.</span> <span class="toc-text">第二种；创建一个包含指定集合c数据的ArrayList</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8Arrays-copyOf-%E5%9B%A0%E4%B8%BA%E6%9C%89%E6%97%B6%E5%80%99toArray-%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E7%9A%84%E4%B8%8D%E6%98%AFObject-class"><span class="toc-number">1.2.4.2.2.1.</span> <span class="toc-text">为什么用Arrays.copyOf()?因为有时候toArray()方法返回的不是Object[].class</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#add-E-e-%E5%B0%BE%E9%83%A8%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="toc-number">1.2.4.3.</span> <span class="toc-text">add(E e) 尾部添加元素</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -329,7 +383,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
